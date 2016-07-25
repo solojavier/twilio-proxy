@@ -19,7 +19,7 @@ post '/sms' do
 
   """<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms to=\"#{number}\">#{params['Body']}</Sms>
+    <Sms to=\"#{number}\">#{params['From']} > #{params['Body']}</Sms>
   </Response>
   """
 end
