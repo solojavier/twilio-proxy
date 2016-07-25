@@ -15,13 +15,14 @@ post '/call' do
 end
 
 post '/sms' do
-  words = params['Body'].split
+  number = ENV['SMS_PHONE']
+  from   = params['From']
+  words  = params['Body'].split
 
-  if words.first == 'Send'
-    _, number, *body_words = *words
+  if number == from
+    number, *body_words = *words
     body = body_words.join(' ')
   else
-    number = ENV['SMS_PHONE']
     body   = "#{params['From']} > #{params['Body']}"
   end
 
