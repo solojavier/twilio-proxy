@@ -22,7 +22,7 @@ post '/sms' do
     body = body_words.join(' ')
   else
     number = ENV['SMS_PHONE']
-    body   = "#{params['From']} > params['Body']"
+    body   = "#{params['From']} > #{params['Body']}"
   end
 
   """<?xml version='1.0' encoding='UTF-8'?>
