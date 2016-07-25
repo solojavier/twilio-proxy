@@ -13,3 +13,13 @@ post '/call' do
   </Response>
   """
 end
+
+post '/sms' do
+  number = ENV['SMS_PHONE']
+
+  """<?xml version='1.0' encoding='UTF-8'?>
+  <Response>
+    <Sms to=\"#{number}\">#{params['Body']}</Sms>
+  </Response>
+  """
+end
