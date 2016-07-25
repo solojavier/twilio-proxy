@@ -19,7 +19,7 @@ post '/sms' do
 
   if words.first == 'Send'
     _, number, *body_words = *words
-    body = body_words.join
+    body = body_words.join(' ')
   else
     number = ENV['SMS_PHONE']
     body   = "#{params['From']} > params['Body']"
