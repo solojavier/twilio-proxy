@@ -15,11 +15,18 @@ post '/call' do
 end
 
 post '/sms' do
-  number = ENV['SMS_PHONE']
+  words = params['Body'].split
+
+  if words.first == 'Send'
+    _, number, *body = *words
+  else
+    number = ENV['SMS_PHONE']
+    body   = params['Body']
+  end
 
   """<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms to=\"#{number}\">#{params['From']} > #{params['Body']}</Sms>
+    <Sms to=\"#{number}\">#{params['From']} > #{body}</Sms>
   </Response>
   """
 end
