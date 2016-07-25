@@ -18,7 +18,8 @@ post '/sms' do
   words = params['Body'].split
 
   if words.first == 'Send'
-    _, number, *body = *words
+    _, number, *body_words = *words
+    body = body_words.join
   else
     number = ENV['SMS_PHONE']
     body   = "#{params['From']} > params['Body']"
