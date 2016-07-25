@@ -21,12 +21,12 @@ post '/sms' do
     _, number, *body = *words
   else
     number = ENV['SMS_PHONE']
-    body   = params['Body']
+    body   = "#{params['From']} > params['Body']"
   end
 
   """<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms to=\"#{number}\">#{params['From']} > #{body}</Sms>
+    <Sms to=\"#{number}\">#{body}</Sms>
   </Response>
   """
 end
