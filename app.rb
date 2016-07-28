@@ -1,17 +1,9 @@
 require 'sinatra'
 
-get '/' do
-  'OK'
-end
-
 post '/call' do
   number = ENV['DIAL_PHONE']
 
-  """<?xml version='1.0' encoding='UTF-8'?>
-  <Response>
-    <Dial><Number>#{number}</Number></Dial>
-  </Response>
-  """
+  build_response("<Dial><Number>#{number}</Number></Dial>")
 end
 
 post '/sms' do
@@ -23,12 +15,16 @@ post '/sms' do
     number, *body_words = *words
     body = body_words.join(' ')
   else
-    body   = "#{params['From']} > #{params['Body']}"
+    body = "#{from} > #{params['Body']}"
   end
 
-  """<?xml version='1.0' encoding='UTF-8'?>
+  build_response("<Sms to=\"#{number}\">#{body}</Sms>")
+end
+
+def build_response(command)
+  ''"<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms to=\"#{number}\">#{body}</Sms>
+    #{command}
   </Response>
-  """
+  "''
 end
