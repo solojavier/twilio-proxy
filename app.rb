@@ -1,24 +1,27 @@
 require 'sinatra'
 
 post '/call' do
-  number = ENV['DIAL_PHONE']
-
-  build_response("<Dial><Number>#{number}</Number></Dial>")
+  dial
 end
 
 post '/sms' do
-  number = ENV['SMS_PHONE']
-  from   = params['From']
-  words  = params['Body'].split
+  sms(params['From'], params['Body'])
+end
 
-  if number == from
-    number, *body_words = *words
-    body = body_words.join(' ')
+def dial(number = ENV['DIAL_PHONE'])
+  build_response("<Dial><Number>#{number}</Number></Dial>")
+end
+
+def sms(from, body, phone = ENV['SMS_PHONE'])
+  if phone == from
+    send_sms(body.match(' ').pre_match, body.match(' ').post_match)
   else
-    body = "#{from} > #{params['Body']}"
+    send_sms(phone, "#{from} > #{body}")
   end
+end
 
-  build_response("<Sms to=\"#{number}\">#{body}</Sms>")
+def send_sms(to, message)
+  build_response("<Sms to=\"#{to}\">#{message}</Sms>")
 end
 
 def build_response(command)
