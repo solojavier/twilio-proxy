@@ -12,11 +12,11 @@ def dial(number = ENV['DIAL_PHONE'])
   build_response("<Dial><Number>#{number}</Number></Dial>")
 end
 
-def sms(from, body, phone = ENV['SMS_PHONE'])
-  if phone == from
+def sms(from, body, number = ENV['SMS_PHONE'])
+  if number == from
     send_sms(body.match(' ').pre_match, body.match(' ').post_match)
   else
-    send_sms(phone, "#{from} > #{body}")
+    send_sms(number, "#{from} > #{body}")
   end
 end
 
