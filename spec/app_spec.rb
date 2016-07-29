@@ -12,18 +12,18 @@ RSpec.describe 'Twilio Proxy App' do
   end
 
   describe 'call forwarding' do
-    let(:phone) { '+523333505050' }
+    let(:number) { '+523333505050' }
 
     before do
-      ENV['PHONE'] = phone
+      ENV['NUMBER'] = number
 
       post '/call'
     end
 
-    it 'uses twiml to dial configured phone' do
+    it 'uses twiml to dial configured number' do
       expected_response =
         "  <Response>\n" \
-        "    <Dial><Number>#{phone}</Number></Dial>\n" \
+        "    <Dial><Number>#{number}</Number></Dial>\n" \
         '  </Response>'
 
       expect(last_response.body).to include(expected_response)
@@ -32,12 +32,12 @@ RSpec.describe 'Twilio Proxy App' do
 
   describe 'sms forwarding' do
     let(:from)    { '+1347234567' }
-    let(:phone)   { '+523333505050' }
+    let(:number)   { '+523333505050' }
     let(:body)    { 'Hello world' }
     let(:message) { "#{from} > #{body}" }
 
     before do
-      ENV['PHONE'] = phone
+      ENV['NUMBER'] = number
 
       post '/sms', 'From' => from, 'Body' => body
     end
@@ -45,7 +45,7 @@ RSpec.describe 'Twilio Proxy App' do
     it 'redirects message with correct message' do
       expected_response =
         "  <Response>\n" \
-        "    <Sms to=\"#{phone}\">#{message}</Sms>\n" \
+        "    <Sms to=\"#{number}\">#{message}</Sms>\n" \
         '  </Response>'
 
       expect(last_response.body).to include(expected_response)
@@ -53,18 +53,18 @@ RSpec.describe 'Twilio Proxy App' do
   end
 
   describe 'sms sending' do
-    let(:phone)   { '+523333505050' }
+    let(:number)   { '+523333505050' }
     let(:to)      { '+134720392'  }
     let(:message) { 'Hello world' }
     let(:body)    { "#{to} #{message}" }
 
     before do
-      ENV['PHONE'] = phone
+      ENV['NUMBER'] = number
 
-      post '/sms', 'From' => phone, 'Body' => body
+      post '/sms', 'From' => number, 'Body' => body
     end
 
-    it 'Sends sms to selected phone' do
+    it 'Sends sms to selected number' do
       expected_response =
         "  <Response>\n" \
         "    <Sms to=\"#{to}\">#{message}</Sms>\n" \
