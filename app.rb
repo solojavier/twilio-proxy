@@ -1,7 +1,7 @@
 require 'sinatra'
 
 post '/call' do
-  Response.new.dial
+  Response.new.call
 end
 
 post '/sms' do
@@ -9,7 +9,7 @@ post '/sms' do
 end
 
 class Response
-  def dial
+  def call
     build_response("<Dial><Number>#{ENV['PHONE']}</Number></Dial>")
   end
 
