@@ -15,7 +15,7 @@ RSpec.describe 'Twilio Proxy App' do
     let(:number) { '+523333505050' }
 
     before do
-      ENV['NUMBER'] = number
+      ENV['PHONE_NUMBER'] = number
 
       post '/call'
     end
@@ -31,13 +31,13 @@ RSpec.describe 'Twilio Proxy App' do
   end
 
   describe 'sms forwarding' do
-    let(:from)    { '+1347234567' }
-    let(:number)   { '+523333505050' }
+    let(:from) { '+1347234567' }
+    let(:number) { '+523333505050' }
     let(:body)    { 'Hello world' }
     let(:message) { "#{from} > #{body}" }
 
     before do
-      ENV['NUMBER'] = number
+      ENV['SMS_NUMBER'] = number
 
       post '/sms', 'From' => from, 'Body' => body
     end
@@ -53,13 +53,13 @@ RSpec.describe 'Twilio Proxy App' do
   end
 
   describe 'sms sending' do
-    let(:number)   { '+523333505050' }
+    let(:number) { '+523333505050' }
     let(:to)      { '+134720392'  }
     let(:message) { 'Hello world' }
     let(:body)    { "#{to} #{message}" }
 
     before do
-      ENV['NUMBER'] = number
+      ENV['SMS_NUMBER'] = number
 
       post '/sms', 'From' => number, 'Body' => body
     end

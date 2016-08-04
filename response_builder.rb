@@ -1,17 +1,18 @@
 class ResponseBuilder
   def initialize
-    @number = ENV['NUMBER']
+    @sms_number   = ENV['SMS_NUMBER']
+    @phone_number = ENV['PHONE_NUMBER']
   end
 
   def for_dial
-    dial_response(@number)
+    dial_response(@phone_number)
   end
 
   def for_sms(from, body)
-    if @number == from
+    if @sms_number == from
       sms_response(body.match(' ').pre_match, body.match(' ').post_match)
     else
-      sms_response(@number, "#{from} > #{body}")
+      sms_response(@sms_number, "#{from} > #{body}")
     end
   end
 
