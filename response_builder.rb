@@ -1,6 +1,6 @@
 class ResponseBuilder
   def initialize
-    @phone_number = ENV['PHONE_NUMBER']
+    @phone_number = ENV['PHONE_NUMBER'].strip
   end
 
   def for_dial
