@@ -8,10 +8,15 @@ class ResponseBuilder
   end
 
   def for_sms(from, body)
+    puts @phone_number
+    puts from
+    puts @phone_number.class
+    puts from.class
+    puts @phone_number == from
     if @phone_number == from
       sms_response(body.match(' ').pre_match, body.match(' ').post_match)
     else
-      sms_response(@phone_number, "#{from}=#{@phone_number} > #{body}")
+      sms_response(@phone_number, "#{from} > #{body}")
     end
   end
 
