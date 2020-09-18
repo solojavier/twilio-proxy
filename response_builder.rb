@@ -1,6 +1,5 @@
 class ResponseBuilder
   def initialize
-    @sms_number   = ENV['SMS_NUMBER']
     @phone_number = ENV['PHONE_NUMBER']
   end
 
@@ -9,10 +8,10 @@ class ResponseBuilder
   end
 
   def for_sms(from, body)
-    if @sms_number == from
+    if @phone_number == from
       sms_response(body.match(' ').pre_match, body.match(' ').post_match)
     else
-      sms_response(@sms_number, "#{from} > #{body}")
+      sms_response(@phone_number, "#{from} > #{@phone_number}: #{body}")
     end
   end
 
