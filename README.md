@@ -17,7 +17,7 @@ and then setup webhooks to you app endpoints '/call' and '/sms' accordingly
 
 * When you get a call to your virtual twilio number it is forwarded to PHONE_NUMBER
 * When an SMS is received by your virtual twilio number it gets forwarded to SMS_NUMBER
-* You can also send an SMS from you virtual twilio number by sendind an SMS from SMS_NUMBER and adding the receiver phone as the first word ("+523333505090 Hi")
+* You can also send an SMS from you virtual twilio number by sendind an SMS from SMS_NUMBER and adding the receiver phone as the first word ("to:+523333505090 Hi")
 
 ## Want to use it?
 
