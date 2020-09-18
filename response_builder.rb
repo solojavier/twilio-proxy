@@ -8,8 +8,8 @@ class ResponseBuilder
   end
 
   def for_sms(from, body)
-    if body.start_with?('to:')
-      to = body.match(' ').pre_match.gsub('to:', '')
+    if body.start_with?('To:')
+      to = body.match(' ').pre_match.gsub('To:', '')
       real_body = body.match(' ').post_match
       sms_response(to, real_body)
     else
