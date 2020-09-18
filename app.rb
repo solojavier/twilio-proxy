@@ -7,5 +7,6 @@ post '/call' do
 end
 
 post '/sms' do
+  puts params['From'].class
   ResponseBuilder.new.for_sms(params['From'], params['Body'])
 end
