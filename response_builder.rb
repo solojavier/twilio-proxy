@@ -30,7 +30,7 @@ class ResponseBuilder
   def sms_response(to, message)
     ''"<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms to=\"#{to}\">#{message}</Sms>
+    <Sms from="#{@phone_number}" to=\"#{to}\">#{message}</Sms>
   </Response>
     "''
   end
