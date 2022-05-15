@@ -1,6 +1,7 @@
 class ResponseBuilder
   def initialize
     @phone_number = ENV['PHONE_NUMBER'].strip
+    @proxy_number = '+13472299900'
   end
 
   def for_dial
@@ -30,7 +31,7 @@ class ResponseBuilder
   def sms_response(to, message)
     ''"<?xml version='1.0' encoding='UTF-8'?>
   <Response>
-    <Sms from="\#{@phone_number}\" to=\"#{to}\">#{message}</Sms>
+    <Sms from="\#{@proxy_number}\" to=\"#{to}\">#{message}</Sms>
   </Response>
     "''
   end
