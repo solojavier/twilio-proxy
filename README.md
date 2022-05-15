@@ -4,10 +4,11 @@ This app serves as a proxy to have a virtual phone and redirect calls and SMS
 
 ## Setup
 
-To deploy this app to heroku you need to setup an env variable:
+To deploy this app to heroku you need to setup the following env variables:
 
  * SMS_NUMBER : Phone number to which you want SMS and calls to be forwarded (+52 format for mx)
- * PHONE_NUMBER : Phone number to which you want SMS and calls to be forwarded (+521 format for mx)
+ * PHONE_NUMBER : Phone number to which you want SMS and calls to be forwarded (+52 format for mx)
+ * PROXY_NUMBER : Phone number from which the numbers and SMS calls are forwarded (+1 format for us)
 
 After you have the app deployed, you need to buy a twilio phone number
 and then setup webhooks to you app endpoints '/call' and '/sms' accordingly
